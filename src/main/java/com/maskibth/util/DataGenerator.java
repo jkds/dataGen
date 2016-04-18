@@ -1,12 +1,19 @@
 package com.maskibth.util;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DataGenerator {
 
     private static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static SecureRandom stringRandom = new SecureRandom();
+
+    private static String[] currencyArray;
 
     public static String generateStringFor(int length) {
         StringBuilder builder = new StringBuilder(length);
@@ -19,14 +26,14 @@ public class DataGenerator {
 
     public void generate(String fileWithAbsolutePath, int rowCount) {
 
-        int columnCount = 18;
+        int columnCount = 20;
 
         List<String[]> rows = new ArrayList<>();
         rows.add(DataGenerator.generateHeaders());
 
         for (int i = 1; i < rowCount; i++) {
             String[] row = new String[columnCount];
-            row[0] = Integer.toString(DataGenerator.generateIntegerFor(50));
+            row[0] = Integer.toString(DataGenerator.generateIntegerFor(500));
             row[1] = DataGenerator.generateStringFor(20);
             row[2] = DataGenerator.generateStringFor(8);
             row[3] = DataGenerator.generateStringFor(19);
@@ -45,6 +52,8 @@ public class DataGenerator {
             row[15] = DataGenerator.STATUS.getRandomStatus().toString();
             row[16] = DataGenerator.generateStringFor(14);
             row[17] = DataGenerator.generateStringFor(19);
+            row[18] = Integer.toString(DataGenerator.generateIntegerFor(500));
+            row[19] = DataGenerator.getCurrencyValues();
             rows.add(row);
         }
 
@@ -57,8 +66,8 @@ public class DataGenerator {
     }
 
     private static String[] generateHeaders() {
-        String headerString = "col1Int,col2String,col3String,col4String,col5String,col6Date, col7date,col8String, col9Int, col10Int, col11Date, col12String, col13String, col14String, col15String," +
-                "col16Enum, col17String, Col18String";
+        String headerString = "col1Int,col2String,col3String,col4String,col5String,col6Date, col7Date,col8String, col9Int, col10Int, col11Date, col12String, col13String, col14String, col15String," +
+                "col16Enum, col17String, col18String, col19Int, col20String ";
         return headerString.split(",");
     }
 
@@ -68,7 +77,10 @@ public class DataGenerator {
         gc.set(gc.YEAR, year);
         int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
         gc.set(gc.DAY_OF_YEAR, dayOfYear);
-        return gc.getTime().toString();
+//        return gc.getTime().toString();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ");
+        return format.format(gc.getTime());
     }
 
     private static int randBetween(int start, int end) {
@@ -88,6 +100,44 @@ public class DataGenerator {
             return VALUES.get(RANDOM.nextInt(SIZE));
         }
 
+    }
+
+    private static String getCurrencyValues() {
+
+        if (currencyArray == null || currencyArray.length < 1) {
+            readCurrencyFromFile();
+        }
+
+        return currencyArray[stringRandom.nextInt(166)];
+
+    }
+
+    private static void readCurrencyFromFile() {
+
+        List<String> currencyList = new ArrayList<>();
+        BufferedReader br = null;
+        try {
+            FileInputStream fstream = new FileInputStream("src/main/resources/currency.txt");
+            br = new BufferedReader(new InputStreamReader(fstream));
+
+            String strLine;
+
+            while ((strLine = br.readLine()) != null) {
+                // Print the content on the console
+                currencyList.add(strLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        currencyArray = new String[currencyList.size()];
+        currencyList.toArray(currencyArray);
     }
 
 }
