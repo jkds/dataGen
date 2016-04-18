@@ -1,9 +1,7 @@
 package com.maskibth.util;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 public class DataGenerator {
 
@@ -44,7 +42,7 @@ public class DataGenerator {
 
             row[13] = DataGenerator.generateStringFor(8);
             row[14] = DataGenerator.generateStringFor(17);
-            row[15] = DataGenerator.generateStringFor(9);
+            row[15] = DataGenerator.STATUS.getRandomStatus().toString();
             row[16] = DataGenerator.generateStringFor(14);
             row[17] = DataGenerator.generateStringFor(19);
             rows.add(row);
@@ -60,7 +58,7 @@ public class DataGenerator {
 
     private static String[] generateHeaders() {
         String headerString = "col1Int,col2String,col3String,col4String,col5String,col6Date, col7date,col8String, col9Int, col10Int, col11Date, col12String, col13String, col14String, col15String," +
-                "col16String, col17String, Col18String";
+                "col16Enum, col17String, Col18String";
         return headerString.split(",");
     }
 
@@ -75,6 +73,21 @@ public class DataGenerator {
 
     private static int randBetween(int start, int end) {
         return start + (int) Math.round(Math.random() * (end - start));
+    }
+
+    enum STATUS {
+
+        NEW, AMEND, CANCEL;
+
+        private static final List<STATUS> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+
+        private static final int SIZE = VALUES.size();
+        private static final SecureRandom RANDOM = new SecureRandom();
+
+        public static STATUS getRandomStatus() {
+            return VALUES.get(RANDOM.nextInt(SIZE));
+        }
+
     }
 
 }
