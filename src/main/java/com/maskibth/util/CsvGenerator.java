@@ -9,6 +9,8 @@ import java.util.List;
 public class CsvGenerator {
 
     public static void writeCsv(String fileWithAbsolutePath, List<String[]> dataList) {
+
+        System.out.println("writing csv in ["+fileWithAbsolutePath+"]");
         CSVWriter writer = null;
         try {
             writer = new CSVWriter(new FileWriter(fileWithAbsolutePath));
