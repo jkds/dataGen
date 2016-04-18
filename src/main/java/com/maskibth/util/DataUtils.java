@@ -78,9 +78,31 @@ class DataUtils {
     }
 
     static String[] generateHeaders() {
-        String headerString = "col1Int,col2String,col3String,col4String,col5String,col6Date, col7Date,col8String, col9Int, col10Int, col11Date, col12String, col13String, col14String, col15String," +
-                "col16Enum, col17String, col18String, col19Int, col20String ";
-        return headerString.split(",");
+        List<String> colList = new ArrayList<>();
+        int i = 1;
+        colList.add("col" + i++ + "Int");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "Date");
+        colList.add("col" + i++ + "Date");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "Int");
+        colList.add("col" + i++ + "Int");
+        colList.add("col" + i++ + "Date");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "Enum");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "String");
+        colList.add("col" + i++ + "Int");
+        colList.add("col" + i + "String");
+
+
+        return colList.toArray(new String[colList.size()]);
     }
 
     enum STATUS {
