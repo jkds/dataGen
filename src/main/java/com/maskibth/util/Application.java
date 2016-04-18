@@ -1,7 +1,5 @@
 package com.maskibth.util;
 
-import com.maskibth.util.DataGenerator;
-
 import static java.lang.System.exit;
 
 public class Application {
@@ -14,11 +12,11 @@ public class Application {
         }
 
         if (args[0] == null || "".equals(args[0].trim())) {
-            System.out.println("Missing file path");
+            System.out.println("Missing file path. e.g. /home/abc.csv");
         }
 
-        if (args[1] == null || "".equals(args[1].trim())) {
-            System.out.println("Missing file path");
+        if (args[1] == null || "".equals(args[1].trim()) || new Integer(args[1].trim()) > (Integer.MAX_VALUE - 1)) {
+            System.out.println("Invalid/missing row count");
         }
 
         String path = args[0];

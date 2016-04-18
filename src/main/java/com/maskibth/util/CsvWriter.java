@@ -6,11 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class CsvGenerator {
+public class CsvWriter {
 
     public static void writeCsv(String fileWithAbsolutePath, List<String[]> dataList) {
 
-        System.out.println("writing csv in ["+fileWithAbsolutePath+"]");
+        System.out.println("writing csv in [" + fileWithAbsolutePath + "]");
         CSVWriter writer = null;
         try {
             writer = new CSVWriter(new FileWriter(fileWithAbsolutePath));
