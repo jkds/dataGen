@@ -21,7 +21,7 @@ class DataGenerator {
             row[j++] = DataUtils.generateRandomString(8);
             row[j++] = DataUtils.generateRandomString(19);
             row[j++] = DataUtils.generateRandomString(10);
-            row[j++] = DataUtils.generateRandomDate(1900, 2016);
+            row[j++] = DataUtils.generateRandomDate(1995, 2016);
             row[j++] = DataUtils.generateRandomDate(2000, 2016);
             row[j++] = DataUtils.generateRandomString(20);
             row[j++] = Integer.toString(DataUtils.generateRandomInteger(1000));
