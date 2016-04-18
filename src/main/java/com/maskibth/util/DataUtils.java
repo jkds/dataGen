@@ -8,13 +8,13 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class DataUtils {
+class DataUtils {
 
     private static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static SecureRandom stringRandom = new SecureRandom();
     private static String[] currencyArray;
 
-    public static String generateRandomString(int length) {
+    static String generateRandomString(int length) {
         StringBuilder builder = new StringBuilder(length);
 
         for (int i = 0; i < length; i++) {
@@ -23,11 +23,11 @@ public class DataUtils {
         return builder.toString();
     }
 
-    public static int generateRandomInteger(int max) {
+    static int generateRandomInteger(int max) {
         return stringRandom.nextInt(max - 1) + 1;
     }
 
-    public static String generateRandomDate(int fromYear, int toYear) {
+    static String generateRandomDate(int fromYear, int toYear) {
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(fromYear, toYear);
         gc.set(gc.YEAR, year);
@@ -42,7 +42,7 @@ public class DataUtils {
         return start + (int) Math.round(Math.random() * (end - start));
     }
 
-    public static String generateRandomCurrency() {
+    static String generateRandomCurrency() {
         if (currencyArray == null || currencyArray.length < 1) {
             readCurrencyFromFile();
         }
@@ -66,7 +66,8 @@ public class DataUtils {
             e.printStackTrace();
         } finally {
             try {
-                br.close();
+                if (br != null)
+                    br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -76,7 +77,7 @@ public class DataUtils {
         currencyList.toArray(currencyArray);
     }
 
-    public static String[] generateHeaders() {
+    static String[] generateHeaders() {
         String headerString = "col1Int,col2String,col3String,col4String,col5String,col6Date, col7Date,col8String, col9Int, col10Int, col11Date, col12String, col13String, col14String, col15String," +
                 "col16Enum, col17String, col18String, col19Int, col20String ";
         return headerString.split(",");

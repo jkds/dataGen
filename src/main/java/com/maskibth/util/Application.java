@@ -25,6 +25,5 @@ public class Application {
 
         DataGenerator generator = new DataGenerator();
         generator.generate(path, maxCount);
-
     }
 }

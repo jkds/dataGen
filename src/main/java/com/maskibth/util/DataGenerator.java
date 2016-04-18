@@ -3,10 +3,10 @@ package com.maskibth.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataGenerator {
+class DataGenerator {
 
 
-    public void generate(String fileWithAbsolutePath, int rowCount) {
+    void generate(String fileWithAbsolutePath, int rowCount) {
 
         List<String[]> rows = new ArrayList<>();
         rows.add(DataUtils.generateHeaders());
@@ -35,12 +35,11 @@ public class DataGenerator {
             row[j++] = DataUtils.generateRandomString(14);
             row[j++] = DataUtils.generateRandomString(19);
             row[j++] = Integer.toString(DataUtils.generateRandomInteger(500));
-            row[j++] = DataUtils.generateRandomCurrency();
+            row[j] = DataUtils.generateRandomCurrency();
             rows.add(row);
         }
 
         CsvWriter.writeCsv(fileWithAbsolutePath, rows);
-
     }
 
 }
