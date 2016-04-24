@@ -77,7 +77,7 @@ class DataUtils {
         currencyList.toArray(currencyArray);
     }
 
-    static String[] generateHeaders() {
+    static String[] generate20Headers() {
         List<String> colList = new ArrayList<>();
         int i = 1;
         colList.add("col" + i++ + "Int");
@@ -103,6 +103,51 @@ class DataUtils {
 
 
         return colList.toArray(new String[colList.size()]);
+    }
+
+    static String[] generate35Headers() {
+        List<String> colList = new ArrayList<>();
+        int i = 1;
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Date",i++));
+        colList.add(genColString("Date",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("Date",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Enum",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Date",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("Date",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Int",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("String",i++));
+        colList.add(genColString("Currency",i++));
+        return colList.toArray(new String[colList.size()]);
+    }
+
+    private static String genColString(String type, int index) {
+        return "col"+index+type;
     }
 
     enum STATUS {

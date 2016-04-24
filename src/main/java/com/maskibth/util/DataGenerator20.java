@@ -1,19 +1,29 @@
 package com.maskibth.util;
 
+import au.com.bytecode.opencsv.CSVWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class DataGenerator {
+class DataGenerator20 implements Generator {
+
+    private static final Logger log = LoggerFactory.getLogger(DataGenerator20.class);
+
+    public void generate(String fileWithAbsolutePath, int rowCount) throws IOException {
 
 
-    void generate(String fileWithAbsolutePath, int rowCount) {
+        CSVWriter writer = new CSVWriter(new FileWriter(fileWithAbsolutePath));
 
         List<String[]> rows = new ArrayList<>();
-        rows.add(DataUtils.generateHeaders());
+        rows.add(DataUtils.generate20Headers());
 
-        for (int i = 1; i < rowCount; i++) {
+        for (int i = 0; i < rowCount; i++) {
 
-            String[] row = new String[DataUtils.generateHeaders().length];
+            String[] row = new String[DataUtils.generate20Headers().length];
 
             int j = 0;
             row[j++] = Integer.toString(DataUtils.generateRandomInteger(500));
@@ -37,9 +47,21 @@ class DataGenerator {
             row[j++] = Integer.toString(DataUtils.generateRandomInteger(500));
             row[j] = DataUtils.generateRandomCurrency();
             rows.add(row);
+
+            if(i % 10000 == 0) {
+                flush(writer, rows);
+            }
+            if(i % 100000 == 0) {
+                log.debug("Written {} rows", i);
+            }
+
+
+
         }
 
-        CsvWriter.writeCsv(fileWithAbsolutePath, rows);
+        flush(writer,rows);
+        writer.close();
+
     }
 
 }

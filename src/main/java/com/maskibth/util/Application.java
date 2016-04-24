@@ -1,12 +1,16 @@
 package com.maskibth.util;
 
+import java.io.IOException;
+
 import static java.lang.System.exit;
 
 public class Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        if (args == null || args.length != 2) {
+        Generator generator = new DataGenerator20();
+
+        if (args == null || args.length < 2) {
             System.out.println("please enter parameters");
             exit(0);
         }
@@ -19,11 +23,16 @@ public class Application {
             System.out.println("Invalid/missing row count");
         }
 
+        if (args[2] == null || "".equals(args[2].trim())) {
+            System.out.println("Invalid/missing row count");
+        } else if(args[2].equals("large")) {
+            generator = new DataGenerator35();
+        }
+
         String path = args[0];
         int maxCount = new Integer(args[1]);
 
-
-        DataGenerator generator = new DataGenerator();
         generator.generate(path, maxCount);
+
     }
 }
